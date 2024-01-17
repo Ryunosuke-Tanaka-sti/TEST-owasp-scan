@@ -32,4 +32,3 @@ jobs:
           docker_name: "owasp/zap2docker-stable"
           token: ${{ secrets.GITHUB_TOKEN }}
           target: "http://localhost:3000/"
-          artifact_name: "scan-result"
