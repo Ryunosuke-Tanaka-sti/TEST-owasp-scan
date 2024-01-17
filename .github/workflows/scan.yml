@@ -1,0 +1,35 @@
+#
+name: OWASP ZAP Scan to OWASP Juice shop
+
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+on:
+  push:
+    branches: ["main"]
+
+# There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+      #
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Pull Docker
+        run: docker pull bkimminich/juice-shop
+
+      - name: Start Juice Shop
+        run: docker run -p 3000:3000 -d bkimminich/juice-shop
+
+      - name: ZAP Full Scan
+        uses: zaproxy/action-full-scan@v0.8.0
+        with:
+          docker_name: "owasp/zap2docker-stable"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: "http://localhost:3000/"
+          artifact_name: "scan-result"
