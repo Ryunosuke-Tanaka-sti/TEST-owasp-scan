@@ -23,6 +23,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: "bkimminich/juice-shop"
+          output: "scan-result"
           scan-type: "image"
           format: "table"
           exit-code: "0"
@@ -31,3 +32,6 @@ jobs:
           severity: "CRITICAL,HIGH"
           scanners: "license, secret vule misconfig"
         #   flag: must be one of ["vuln" "misconfig" "secret" "license"]
+
+      - name: test ls
+        run: ls -al
