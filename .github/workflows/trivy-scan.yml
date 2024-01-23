@@ -33,5 +33,7 @@ jobs:
           scanners: "license, secret vule misconfig"
         #   flag: must be one of ["vuln" "misconfig" "secret" "license"]
 
-      - name: test ls
-        run: ls -al
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-result
+          path: scan-result
