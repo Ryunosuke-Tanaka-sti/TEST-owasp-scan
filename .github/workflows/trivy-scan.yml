@@ -3,8 +3,7 @@ name: Trivy Scan to OWASP Juice shop
 
 # Configures this workflow to run every time a change is pushed to the branch called `release`.
 on:
-  push:
-    branches: ["main"]
+  workflow_dispatch:
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:

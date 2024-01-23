@@ -1,0 +1,29 @@
+#
+name: Artifact Test
+
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+on:
+  workflow_dispatch:
+
+# There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    steps:
+      - name: create artifact file
+        run: echo hello > world.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact1
+          path: world.txt
+  job2:
+    runs-on: ubuntu-latest
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    steps:
+      - name: create artifact file
+        run: echo hello > world.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact2
+          path: world.txt
