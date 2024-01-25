@@ -1,0 +1,17 @@
+#
+name: Env Test
+
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+on:
+  workflow_dispatch:
+
+# There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      TEST: "test"
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    steps:
+      - name: check files
+        run: ls -al
